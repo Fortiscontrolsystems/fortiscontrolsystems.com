@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortis Control Systems — Mission-Critical Infrastructure Automation</title>
+<meta name="description" content="Industrial-grade controls integration and reliability automation for airports, ports, government facilities, and institutional infrastructure across South Florida.">
+<meta name="theme-color" content="#0D2B5E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #0D2B5E;
+  --navy-deep: #081D44;
+  --gold: #B87D0E;
+  --gold-light: #D4970F;
+  --steel: #3A5F80;
+  --paper: #FAFAF7;
+  --bone: #F4F1EA;
+  --ink: #0A0A0A;
+  --gray: #6B6B6B;
+  --gray-light: #B5B5B5;
+  --rule: rgba(13, 43, 94, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ────────────────────────────────────────────────────────── */
+.serif { font-family: 'Fraunces', serif; font-variation-settings: 'opsz' 144; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────────────────────── */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.container-narrow { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+
+section { padding: 120px 0; position: relative; }
+
+@media (max-width: 768px) {
+  section { padding: 80px 0; }
+  .container, .container-narrow { padding: 0 24px; }
+}
+
+/* ── NAVIGATION ────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(250, 250, 247, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 100;
+  padding: 16px 0;
+}
+.nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
+.nav-logo svg { width: 28px; height: 28px; }
+.nav-logo-text { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+.nav-logo-subtext { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gray); margin-top: 2px; }
+.nav-cta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--navy); color: var(--paper); padding: 12px 22px; border-radius: 2px; text-decoration: none;
+  transition: all 0.2s ease; font-weight: 500;
+}
+.nav-cta:hover { background: var(--navy-deep); transform: translateY(-1px); }
+
+@media (max-width: 600px) {
+  .nav-logo-subtext { display: none; }
+  .nav-cta { padding: 10px 16px; font-size: 11px; }
+}
+
+/* ── HERO ──────────────────────────────────────────────────────────────── */
+.hero {
+  padding: 200px 0 140px;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hero-inner { position: relative; }
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.hero-meta-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144;
+  color: var(--navy);
+  max-width: 900px;
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.hero-subhead {
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.55;
+  color: var(--gray);
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--navy);
+  color: var(--paper);
+  padding: 20px 36px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-primary:hover { background: var(--navy-deep); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(13, 43, 94, 0.25); }
+.btn-primary svg { width: 14px; height: 14px; transition: transform 0.2s; }
+.btn-primary:hover svg { transform: translateX(4px); }
+
+.btn-secondary {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--navy);
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+.hero-aside {
+  position: absolute;
+  right: 32px;
+  top: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  text-align: right;
+}
+.hero-aside-line { display: flex; gap: 12px; align-items: center; justify-content: flex-end; }
+.hero-aside-label { color: var(--gray); }
+@media (max-width: 1100px) { .hero-aside { display: none; } }
+
+/* ── STATS BAR ─────────────────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--navy);
+  color: var(--paper);
+  padding: 56px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+}
+.stat-item {
+  border-left: 1px solid rgba(184, 125, 14, 0.4);
+  padding-left: 24px;
+}
+.stat-number {
+  font-family: 'Fraunces', serif;
+  font-size: 56px;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 12px;
+}
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+@media (max-width: 800px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; }
+  .stat-number { font-size: 42px; }
+}
+
+/* ── SECTION HEADERS ──────────────────────────────────────────────────── */
+.section-header {
+  margin-bottom: 80px;
+  max-width: 740px;
+}
+.section-header h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--navy);
+  margin: 20px 0 24px;
+}
+.section-header p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray);
+}
+
+/* ── SERVICES ─────────────────────────────────────────────────────────── */
+#services { background: var(--paper); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.service-card {
+  background: var(--paper);
+  padding: 48px 40px;
+  transition: background 0.3s ease;
+  cursor: default;
+}
+.service-card:hover { background: var(--bone); }
+.service-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.service-title {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.service-desc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--gray);
+}
+@media (max-width: 800px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { padding: 36px 28px; }
+}
+
+/* ── INDUSTRIES ───────────────────────────────────────────────────────── */
+#industries { background: var(--bone); }
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  margin-top: 20px;
+}
+.industry-card {
+  text-align: left;
+  border-top: 2px solid var(--navy);
+  padding-top: 20px;
+}
+.industry-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.industry-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray);
+}
+@media (max-width: 1000px) {
+  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .industries-grid { grid-template-columns: 1fr; }
+}
+
+/* ── WHY FORTIS ───────────────────────────────────────────────────────── */
+#why {
+  background: var(--navy);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+#why::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -200px;
+  width: 600px; height: 600px;
+  border: 1px solid rgba(184, 125, 14, 0.15);
+  border-radius: 50%;
+}
+#why::after {
+  content: '';
+  position: absolute;
+  top: 100px; right: -100px;
+  width: 400px; height: 400px;
+  border: 1px solid rgba(184, 125, 14, 0.1);
+  border-radius: 50%;
+}
+.why-inner { position: relative; z-index: 2; max-width: 800px; }
+.why-inner .eyebrow { color: var(--gold-light); }
+.why-inner h2 {
+  font-size: clamp(36px, 5vw, 56px);
+  color: var(--paper);
+  font-weight: 300;
+  margin: 20px 0 40px;
+  font-style: italic;
+}
+.why-inner p {
+  font-size: 19px;
+  line-height: 1.7;
+  color: rgba(250, 250, 247, 0.85);
+  margin-bottom: 24px;
+}
+.why-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--gold-light);
+  border-left: 2px solid var(--gold);
+  padding-left: 28px;
+  margin-top: 40px;
+}
+
+/* ── ABOUT ────────────────────────────────────────────────────────────── */
+#about { background: var(--paper); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-image-placeholder {
+  aspect-ratio: 4/5;
+  background: var(--bone);
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-light);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+}
+.about-image-placeholder svg { width: 80px; height: 80px; opacity: 0.3; margin-bottom: 16px; }
+.about-text h2 {
+  font-size: clamp(36px, 4.5vw, 52px);
+  font-weight: 300;
+  color: var(--navy);
+  margin: 16px 0 32px;
+}
+.about-text p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.about-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.credential {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.credential strong { color: var(--navy); }
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-image-placeholder { aspect-ratio: 1/1; max-width: 360px; }
+}
+
+/* ── CONTACT ──────────────────────────────────────────────────────────── */
+#contact { background: var(--bone); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 64px;
+  border: 1px solid var(--rule);
+}
+.contact-method {
+  padding: 56px 32px;
+  text-align: center;
+  background: var(--paper);
+  border-right: 1px solid var(--rule);
+  transition: background 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.contact-method:last-child { border-right: none; }
+.contact-method:hover { background: var(--bone); }
+.contact-method-icon {
+  width: 44px; height: 44px;
+  margin: 0 auto 24px;
+  color: var(--gold);
+}
+.contact-method-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+.contact-method-value {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--navy);
+  word-break: break-word;
+}
+@media (max-width: 800px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-method { border-right: none; border-bottom: 1px solid var(--rule); }
+  .contact-method:last-child { border-bottom: none; }
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy-deep);
+  color: rgba(250, 250, 247, 0.6);
+  padding: 60px 0 40px;
+}
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  display: flex; align-items: center; gap: 14px;
+}
+.footer-brand svg { width: 36px; height: 36px; color: var(--gold-light); }
+.footer-brand-text {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--paper);
+}
+.footer-brand-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 247, 0.5);
+  margin-top: 4px;
+}
+.footer-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-align: right;
+  color: rgba(250, 250, 247, 0.5);
+  line-height: 1.8;
+}
+.footer-meta a { color: rgba(250, 250, 247, 0.7); text-decoration: none; margin-left: 16px; }
+.footer-meta a:hover { color: var(--gold-light); }
+.footer-divider {
+  margin: 40px 0 24px;
+  border: 0;
+  border-top: 1px solid rgba(250, 250, 247, 0.1);
+}
+.footer-copyright {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(250, 250, 247, 0.4);
+}
+@media (max-width: 700px) {
+  .footer-meta { text-align: left; }
+  .footer-meta a { margin-left: 0; margin-right: 16px; }
+}
+
+/* ── ANIMATIONS ───────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-meta { animation: fadeUp 0.8s ease-out backwards; }
+.hero-meta { animation-delay: 0.1s; }
+.hero h1 { animation-delay: 0.2s; }
+.hero-subhead { animation: fadeUp 0.8s ease-out 0.4s backwards; }
+.hero-ctas { animation: fadeUp 0.8s ease-out 0.5s backwards; }
+.hero-aside { animation: fadeUp 0.8s ease-out 0.7s backwards; }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,4 70,22 70,58 40,76 10,58 10,22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="40,20 56,28 56,52 40,60 24,52 24,28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" opacity="0.35"/>
+        <line x1="40" y1="34" x2="40" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="40" y1="46" x2="40" y2="58" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="45.5" y1="37" x2="55" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="45.5" y1="43" x2="55" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="34.5" y1="37" x2="25" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="34.5" y1="43" x2="25" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="40" cy="40" r="6" fill="currentColor"/>
+        <circle cx="40" cy="40" r="9" fill="none" stroke="#B87D0E" stroke-width="1.5" opacity="0.7"/>
+      </svg>
+      <div>
+        <div class="nav-logo-text">Fortis</div>
+        <div class="nav-logo-subtext">Control Systems</div>
+      </div>
+    </a>
+    <a href="https://cal.com/fortiscontrolsystems/consultation" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-meta">
+      <span class="hero-meta-dot"></span>
+      <span>Est. Miami · 2026</span>
+      <span style="opacity:0.4">/</span>
+      <span>Infrastructure Controls</span>
+    </div>
+
+    <h1>
+      Mission-critical<br>
+      infrastructure <em>automation</em><br>
+      for facilities that<br>
+      cannot fail.
+    </h1>
+
+    <p class="hero-subhead">
+      Industrial-grade controls integration and reliability automation for airports, ports,
+      government facilities, and institutional infrastructure across South Florida.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="https://cal.com/fortiscontrolsystems/consultation" class="btn-primary">
+        Book a Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+
+    <div class="hero-aside">
+      <div class="hero-aside-line"><span class="hero-aside-label">Direct line</span><span>+1 305 810 8952</span></div>
+      <div class="hero-aside-line"><span class="hero-aside-label">Coverage</span><span>South Florida</span></div>
+      <div class="hero-aside-line"><span class="hero-aside-label">Format</span><span>By appointment</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Years Industrial<br>Automation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Remote Monitoring<br>Architecture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Core Service<br>Verticals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Reliability Is<br>The Standard</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">// Capabilities</div>
+      <h2>Built for systems<br>that must run.</h2>
+      <p>Fortis specializes in integrating and modernizing control systems for mission-critical facilities. Industrial-grade thinking applied to commercial and institutional infrastructure.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01 / Power & Energy</div>
+        <h3 class="service-title">Power Monitoring & Energy Systems</h3>
+        <p class="service-desc">Real-time visibility into electrical distribution, demand patterns, power quality, and energy performance. Integration with switchgear, panels, and utility metering for facility-wide intelligence.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02 / Backup Power</div>
+        <h3 class="service-title">Generator & ATS Automation</h3>
+        <p class="service-desc">Reliable backup power monitoring including auto-test sequencing, runtime logging, fuel tracking, and ATS failover analytics. NFPA 110 compliant. Critical for hurricane-prone South Florida facilities.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03 / Water Infrastructure</div>
+        <h3 class="service-title">Pump Station Controls</h3>
+        <p class="service-desc">Lead-lag sequencing, redundancy logic, VFD integration, and remote monitoring for stormwater, lift stations, and cooling infrastructure. Built for reliability when failure isn't an option.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04 / Modernization</div>
+        <h3 class="service-title">PLC Modernization & Integration</h3>
+        <p class="service-desc">Upgrade legacy control systems with modern Schneider Modicon PLCs, BACnet integration, and structured logic design. Bring old infrastructure into the current decade without ripping it out.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">05 / Visibility</div>
+        <h3 class="service-title">SCADA & Remote Monitoring</h3>
+        <p class="service-desc">24/7 visibility into your critical systems through web-based dashboards, intelligent alarming, and automated reporting. Standardized monitoring protocols across all your facilities.</p>
+      </div>
+
+      <div class="service-card" style="background: var(--bone);">
+        <div class="service-num" style="color: var(--navy);">— Need something specific?</div>
+        <h3 class="service-title">Let's discuss your facility.</h3>
+        <p class="service-desc">Every infrastructure challenge is different. A 30-minute consultation is the fastest way to understand whether Fortis is the right fit for your project.</p>
+        <a href="https://cal.com/fortiscontrolsystems/consultation" class="btn-secondary" style="margin-top: 24px; display: inline-block; padding: 12px 0;">Schedule a Conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INDUSTRIES ── -->
+<section id="industries">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">// Who We Serve</div>
+      <h2>Institutional<br>infrastructure.</h2>
+      <p>Built for facilities where downtime isn't an inconvenience — it's a failure mode with consequences.</p>
+    </div>
+
+    <div class="industries-grid">
+      <div class="industry-card">
+        <h3>Airports & Aviation</h3>
+        <p>Terminal HVAC controls, central plant optimization, energy monitoring, and fault detection for aviation infrastructure.</p>
+      </div>
+      <div class="industry-card">
+        <h3>Ports & Maritime</h3>
+        <p>Cruise terminal automation, electrical load monitoring, flood pump station controls, and environmental monitoring.</p>
+      </div>
+      <div class="industry-card">
+        <h3>Government & Municipal</h3>
+        <p>Courthouses, water treatment plants, emergency management centers, pump stations, and public facilities.</p>
+      </div>
+      <div class="industry-card">
+        <h3>Hospitals & Healthcare</h3>
+        <p>Critical environment control, generator automation, power quality monitoring, and compliance reporting.</p>
+      </div>
+      <div class="industry-card">
+        <h3>Mission-Critical Sites</h3>
+        <p>Data centers, communications hubs, and any facility where infrastructure failure isn't an acceptable outcome.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY FORTIS ── -->
+<section id="why">
+  <div class="container why-inner">
+    <div class="eyebrow">// The Difference</div>
+    <h2>Industrial discipline.<br>Institutional focus.</h2>
+    <p>Most building automation contractors come from HVAC or electrical trades. We don't.</p>
+    <p>Fortis was built on industrial automation thinking — the same structured engineering, root-cause analysis, and reliability discipline that runs Toyota production lines and aerospace maintenance operations.</p>
+    <p>We bring that mindset to commercial and institutional infrastructure. The result is control systems that are properly documented, properly tested, properly redundant, and properly maintained.</p>
+    <blockquote class="why-quote">
+      Because for the facilities we serve,<br>"good enough" isn't.
+    </blockquote>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-placeholder">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="40" cy="32" r="14"/>
+          <path d="M16 70 Q16 50 40 50 Q64 50 64 70"/>
+        </svg>
+        <div>Founder Portrait</div>
+      </div>
+
+      <div class="about-text">
+        <div class="eyebrow">// About the Founder</div>
+        <h2>Valdeci Godoy</h2>
+        <p>Fortis Control Systems was founded by Valdeci Godoy, an engineer with a background spanning industrial automation, aerospace systems, and infrastructure controls.</p>
+        <p>His career began in industrial automation with Toyota, where he developed expertise in PLC programming, SCADA systems, and robotics integration. He later moved into aerospace, specializing in fuel tank ignition mitigation systems and serving as subject matter expert across multiple aircraft platforms, including the Boeing 737NG and Airbus A320/A321.</p>
+        <p>Fortis brings that industrial and aerospace discipline to commercial and institutional infrastructure — where reliability, documentation, and structured engineering matter most.</p>
+
+        <div class="about-credentials">
+          <div class="credential"><strong>Base</strong> &nbsp;Miami, Florida</div>
+          <div class="credential"><strong>Coverage</strong> &nbsp;South Florida +</div>
+          <div class="credential"><strong>Stack</strong> &nbsp;Schneider · BACnet · Modbus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header" style="text-align: center; margin: 0 auto 0;">
+      <div class="eyebrow" style="display: block; text-align: center;">// Get in Touch</div>
+      <h2 style="text-align: center;">Let's talk.</h2>
+      <p style="text-align: center; margin: 0 auto;">Whether you're planning a controls upgrade, need a system assessment, or want to discuss a specific infrastructure challenge — we'd be glad to talk.</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://cal.com/fortiscontrolsystems/consultation" class="contact-method">
+        <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <path d="M16 2v4M8 2v4M3 10h18"/>
+        </svg>
+        <div class="contact-method-label">Schedule a Call</div>
+        <div class="contact-method-value">Free 30-min Consultation</div>
+      </a>
+
+      <a href="mailto:contact@fortiscontrolsystems.com" class="contact-method">
+        <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M22 7l-10 7L2 7"/>
+        </svg>
+        <div class="contact-method-label">Email</div>
+        <div class="contact-method-value">contact@fortiscontrolsystems.com</div>
+      </a>
+
+      <a href="tel:+13058108952" class="contact-method">
+        <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <div class="contact-method-label">Direct Line</div>
+        <div class="contact-method-value">+1 (305) 810-8952</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="40,4 70,22 70,58 40,76 10,58 10,22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="40,20 56,28 56,52 40,60 24,52 24,28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" opacity="0.35"/>
+          <circle cx="40" cy="40" r="6" fill="currentColor"/>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Fortis Control Systems</div>
+          <div class="footer-brand-sub">Mission-Critical Infrastructure Automation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-meta">
+      Miami, Florida · By appointment<br>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-copyright">
+    © 2026 Fortis Control Systems · All rights reserved
+  </div>
+</footer>
+
+</body>
+</html>
