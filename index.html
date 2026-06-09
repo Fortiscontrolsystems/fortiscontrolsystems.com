@@ -479,10 +479,12 @@ section { padding: 120px 0; position: relative; }
 }
 .contact-method-value {
   font-family: 'Fraunces', serif;
-  font-size: 20px;
+  font-size: clamp(14px, 1.6vw, 20px);
   font-weight: 500;
   color: var(--navy);
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (max-width: 800px) {
   .contact-grid { grid-template-columns: 1fr; }
