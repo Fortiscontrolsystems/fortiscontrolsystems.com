@@ -801,14 +801,41 @@ section { padding: 120px 0; position: relative; }
         <div class="contact-method-value">Free 30-min Consultation</div>
       </a>
 
-      <a href="mailto:vgodoy@fortiscontrolsystems.com" class="contact-method">
-        <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="M22 7l-10 7L2 7"/>
-        </svg>
-        <div class="contact-method-label">Email</div>
-        <div class="contact-method-value">vgodoy@fortiscontrolsystems.com</div>
-      </a>
+     <div class="contact-method" style="padding: 56px 32px;">
+  <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 24px; display: block;">
+    <rect x="2" y="4" width="20" height="16" rx="2"/>
+    <path d="M22 7l-10 7L2 7"/>
+  </svg>
+  <div class="contact-method-label">Email</div>
+  <div class="contact-method-value" id="emailValue">vgodoy@fortiscontrolsystems.com</div>
+  <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+    <button onclick="copyEmail()" id="copyBtn" style="
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: transparent;
+      border: 1px solid var(--navy);
+      padding: 10px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    ">Copy Address</button>
+    <a href="mailto:vgodoy@fortiscontrolsystems.com" style="
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--navy);
+      padding: 10px 16px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    ">Open Mail App</a>
+  </div>
+</div>
 
       <a href="tel:+13058108952" class="contact-method">
         <svg class="contact-method-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -852,5 +879,28 @@ section { padding: 120px 0; position: relative; }
   </div>
 </footer>
 
+<script>
+function copyEmail() {
+  const email = 'vgodoy@fortiscontrolsystems.com';
+  const btn = document.getElementById('copyBtn');
+  const originalText = btn.textContent;
+
+  navigator.clipboard.writeText(email).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.style.background = '#0D5E3A';
+    btn.style.color = '#FFFFFF';
+    btn.style.borderColor = '#0D5E3A';
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = 'transparent';
+      btn.style.color = 'var(--navy)';
+      btn.style.borderColor = 'var(--navy)';
+    }, 2000);
+  });
+}
+</script>
+
+  
 </body>
 </html>
